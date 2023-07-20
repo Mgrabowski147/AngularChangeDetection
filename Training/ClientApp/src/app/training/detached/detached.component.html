@@ -1,0 +1,26 @@
+<div class="myBorder">
+  <h1>Detached component</h1>
+
+  <label>Number input from parent: {{numberFromParent}}</label>
+  <br>
+  <label>Component input for children:</label>
+  <input 
+    type="number" 
+    name="num" 
+    [formControl]="numberControl"/>
+
+  <br>
+  <button my-button (click)="onEmptyClick()">EmptyButton</button>
+  <button my-button (click)="onDetectChangesClick()">DetectChanges</button>
+
+  <br><br>
+  <label>Shared service number: {{sharedService.sharedNumber}} </label>
+  <!--<br>
+    <label>Shared service observable async number:  {{sharedService.sharedObservableNumber | async}} </label>-->
+  <br>
+  <label>Shared service observable subscribe number:  {{sharedNumberSubscribe}} </label> <br>
+
+  <!-- <label>Shared service fetch data: {{sharedService?.forecasts?.date}}</label> -->
+  <app-standard-inner [numberFromParent]="numberControl.valueChanges"></app-standard-inner>
+  <app-onpush-inner [numberFromParent]="numberToPass"></app-onpush-inner>
+</div>

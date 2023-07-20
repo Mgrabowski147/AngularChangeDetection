@@ -1,0 +1,43 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+  <div class="myBorder">
+    <h1>Standard component</h1>
+
+    <ng-container *ngIf="[].includes(example)">
+      <label>Number input from parent: {{numberFromParent}}</label>
+      <br>
+      <label>Array input from parent:</label>
+      <label *ngFor="let el of arrayFromParent">{{el}}</label>
+      <br>
+      <label>Standard component input:</label>
+      <input 
+        type="number" 
+        name="num" 
+        [formControl]="numberControl"/>
+  
+      <br>
+    </ng-container>
+
+    <button my-button (click)="onEmptyClick()">EmptyButton</button>
+   
+    <ng-container *ngIf="[].includes(example)">
+      <button my-button (click)="onFetchData()">FetchData</button>
+    </ng-container>
+
+    <br><br>
+    <label>Shared service number: {{sharedService.sharedNumber}} </label>
+    <!--<br>
+      <label>Shared service observable async number:  {{sharedService.sharedObservableNumber | async}} </label>-->
+    <br>
+    <label>Shared service observable subscribe number:  {{sharedNumberSubscribe}} </label>
+      
+    <ng-container *ngIf="[].includes(example)">
+      <br>
+      <label>Shared service forecast: {{sharedService.forecasts?.date}} {{ sharedService.forecasts?.temperatureC }}</label>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.Default].includes(example)">
+      <app-standard-inner [numberFromParent]="numberControl.valueChanges"></app-standard-inner>
+      <app-standard-inner [numberFromParent]="numberControl.valueChanges"></app-standard-inner>
+   </ng-container>
+  </div>
+</ng-container>

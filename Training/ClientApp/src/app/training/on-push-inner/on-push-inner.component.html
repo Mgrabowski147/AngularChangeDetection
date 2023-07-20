@@ -1,0 +1,30 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+  <div class="myBorder">
+    <h1>Inner onpush component</h1>
+    <label>Number from parent: {{ numberFromParent }}</label>
+    <br>
+    <ng-container *ngIf="[].includes(example)">
+      <label>Inner onpush component input:</label>
+      <input 
+        type="number" 
+        name="num" 
+        [formControl]="numberControl"/>
+      <br>
+    </ng-container>
+
+    <button my-button (click)="onEmptyClick()">EmptyButton</button>
+
+    <ng-container *ngIf="[Example.OnPushWithInput, Example.Detached].includes(example)">
+      <br><br>
+      <label>Shared service number: {{sharedService.sharedNumber}} </label>
+      <br>
+      <label>Shared service observable subscribe number:  {{sharedNumberSubscribe}} </label>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.OnPushWithAsync].includes(example)">
+      <br>
+      <label>Shared service observable async number:  {{sharedService.sharedObservableNumber | async}} </label>
+    </ng-container>
+  </div>
+
+</ng-container>

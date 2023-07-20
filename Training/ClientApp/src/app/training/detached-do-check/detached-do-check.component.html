@@ -1,0 +1,15 @@
+<div class="myBorder">
+  <h1>Detached component with doCheck</h1>
+
+  <label>Number input from parent: {{numberFromParent}}</label>
+  <br>
+  <label>Component input for children:</label>
+  <input 
+    type="number" 
+    name="num" 
+    [formControl]="numberControl"/>
+
+  <br>
+
+  <app-onpush-inner [numberFromParent]="numberToPass"></app-onpush-inner>
+</div>

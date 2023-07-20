@@ -1,0 +1,62 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+
+<div class="myBorder">
+  <h1>On push component</h1>
+
+  <ng-container *ngIf="[].includes(example)">
+    <label>Number input from parent: {{numberFromParent}}</label>
+    <br>
+  </ng-container>
+
+
+  <!-- <label>Array input from parent:</label>
+  <label *ngFor="let el of arrayFromParent">{{el}}</label> -->
+  <ng-container *ngIf="[Example.OnPushWithInput, Example.Detached, Example.DetachedDoCheck].includes(example)">
+    <br>
+    <label>On push component input for children:</label>
+    <input 
+      type="number" 
+      name="num" 
+      [formControl]="numberControl"/>
+  </ng-container>
+
+  <ng-container *ngIf="[Example.HttpRequest].includes(example)">
+    <br>
+    <button my-button (click)="onEmptyClick()">EmptyButton</button>
+    <br>
+    <button my-button (click)="onFetchData()">FetchData</button>
+    <br><br>
+    <br>
+
+    <label>Shared service forecast: {{sharedService.forecasts?.date}} {{ sharedService.forecasts?.temperatureC }}</label>
+  </ng-container>
+
+  <ng-container *ngIf="[Example.SetTimeout].includes(example)">
+    <br>
+    <button my-button (click)="Timeout()">Timeout</button>
+    <br>
+    <button my-button (click)="TimeoutOutOfZone()">Timeout out of zone</button>
+  </ng-container>
+
+  <ng-container *ngIf="[Example.Detached, Example.OnPushWithInput, Example.SetTimeout].includes(example)">
+    <br>
+    <label>Shared service number: {{sharedService.sharedNumber}} </label>
+    <br>
+    <label>Shared service observable subscribe number:  {{sharedNumberSubscribe}} </label>
+  </ng-container>
+
+  <ng-container *ngIf="[Example.OnPushWithInput, Example.OnPushWithAsync].includes(example)">
+    <app-onpush-inner [numberFromParent]="numberToPass"></app-onpush-inner>
+    <app-onpush-inner [numberFromParent]="numberToPass"></app-onpush-inner>
+  </ng-container>
+
+  <ng-container *ngIf="[Example.Detached].includes(example)">
+    <app-detached [numberFromParent]="numberToPass"></app-detached>
+  </ng-container>
+  
+  <ng-container *ngIf="[Example.DetachedDoCheck].includes(example)">
+    <app-detached-do-check [numberFromParent]="numberToPass"></app-detached-do-check>
+  </ng-container>
+</div>
+
+</ng-container>

@@ -1,0 +1,10 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+  <div class="myBorder">
+    <h1>Standard component (err)</h1>
+    <br>
+    <button (click)="emitValue()">emit value</button>
+    <br>
+    <label>Random number to emit as output: {{ randomNumber }}</label>
+    {{OnChangeDetection()}}
+  </div>
+</ng-container>

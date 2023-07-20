@@ -1,0 +1,75 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+  <div class="myBorder">
+    <div class="containter">
+      <button my-button (click)="setExample(1)">Standard</button>
+      <button my-button (click)="setExample(2)">OnPush with Input</button>
+      <button my-button (click)="setExample(3)">OnPush with Async</button>
+      <button my-button (click)="setExample(4)">Detached</button>
+      <button my-button (click)="setExample(5)">Detached with do check</button>
+      <button my-button (click)="setExample(6)">Http Request</button>
+      <button my-button (click)="setExample(7)">Set Timeout</button>
+      <button my-button (click)="setExample(8)">Expression changed err</button>
+    </div>
+    <h1>Main component (Standard)</h1>
+    <!-- <label>Input to pass to children as array:</label>
+    <input 
+      type="text" 
+      [formControl]="arrayControl"/>
+      
+    <br> -->
+    <ng-container *ngIf="[].includes(example)">
+      <label>Input number to pass to children:</label>  
+      <input 
+        type="number" 
+        [(ngModel)]="numberForChildren"/>  
+    </ng-container>
+
+    <ng-container *ngIf="[Example.OnPushWithInput, Example.Default, Example.OnPushWithAsync, Example.Detached, Example.SetTimeout].includes(example)">
+      <br>
+      <button my-button (click)="onEmptyClick()">EmptyButton</button>
+      <br>
+      <button my-button (click)="onServiceValueClick()">SetRandomServiceValue</button>
+      <br>
+      <button my-button (click)="onServiceObservableValueClick()">SetRandomServiceObservableValue</button>
+      <br><br>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.HttpRequest].includes(example)">
+      <button my-button (click)="onFetchData()">FetchData</button>
+      <br>
+    </ng-container>
+    
+    <ng-container *ngIf="[Example.OnPushWithInput, Example.Default, Example.OnPushWithAsync, Example.Detached, Example.SetTimeout].includes(example)">
+      <label>Shared service number: {{sharedService.sharedNumber}}</label>
+      <br>
+      <label>Shared service observable number async: {{sharedService.sharedObservableNumber | async}}</label>
+      <br>
+      <label>Shared service observable number subscribe: {{sharedService.sharedObservableNumber | async}}</label>
+      <br>
+    </ng-container>
+
+    
+    <ng-container *ngIf="[Example.ExpressionChanged].includes(example)">
+      <button my-button (click)="onEmptyClick()">EmptyButton</button>
+      <br>  <label>Output emitted from child: {{valueFromChildsOutput}}</label>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.HttpRequest].includes(example)">
+      <label>Shared service forecast: {{sharedService.forecasts?.date}} {{ sharedService.forecasts?.temperatureC }}</label>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.OnPushWithInput, Example.OnPushWithAsync, 
+        Example.Detached, Example.DetachedDoCheck, Example.HttpRequest, Example.SetTimeout].includes(example)">
+      <app-on-push [arrayFromParent]="arrayForChildren" [numberFromParent]="numberForChildren"></app-on-push>
+    </ng-container>
+    
+    <ng-container *ngIf="[Example.Default].includes(example)">
+      <app-standard [arrayFromParent]="arrayForChildren" [numberFromParent]="numberForChildren"></app-standard>
+    </ng-container>
+
+    <ng-container *ngIf="[Example.ExpressionChanged].includes(example)">
+      <app-standard-error (valueForParent)="onValueChange($event)"></app-standard-error>
+    </ng-container>
+    
+  </div>
+</ng-container>

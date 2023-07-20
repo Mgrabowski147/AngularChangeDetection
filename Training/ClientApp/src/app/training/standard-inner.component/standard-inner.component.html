@@ -1,0 +1,21 @@
+<ng-container *ngIf="(sharedService.exampleNo | async) as example">
+  <div class="myBorder">
+  <h1>Inner standard component</h1>
+  <ng-container *ngIf="[Example.Detached].includes(example)">
+    <label>Number from parent {{numberFromParent | async}}</label>
+    <br>
+  </ng-container>
+
+
+  <!-- <label>Inner standard component input:</label>
+  <input 
+    type="number" 
+    name="num" 
+    [formControl]="numberControl"/>
+    <br> -->
+    <button my-button (click)="onEmptyClick()">EmptyButton</button>
+    <br><br>
+    <label>Shared service Number {{sharedService.sharedNumber}}</label>
+
+</div>
+</ng-container>
